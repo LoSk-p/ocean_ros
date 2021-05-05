@@ -1,0 +1,3 @@
+string token_address
+string did
+string pool_address

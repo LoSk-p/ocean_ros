@@ -1,0 +1,10 @@
+string private_key
+string data_created
+string type
+string name
+string author
+string license
+string[] files_content_type
+string[] files_url
+float32 tokens_nomber
+float32 ocean_amount
