@@ -70,8 +70,8 @@ You can see information about datatoken in `/token_response` topic:
 rostopic echo /token_response
 ```
 ### Buy datatoken
-Publish message to `/get_datatoken` topic with the private key from your metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/token_response` topic). 
-Message example:
+Publish message to `/get_datatoken` topic with the private key from your metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/token_response` topic).
+Message example (don't forget to change `destination` in the message):
 ```bash
 rostopic pub /get_datatoken ocean_ros/BuyDatatoken "{private_key: '', destination: '/home/user/', token_address: '0x9fb21F68257F1d718d764B68b1430B6460796e42', did: 'did:op:9fb21F68257F1d718d764B68b1430B6460796e42', pool_address: '0xcF295B85ef5ADd0E513B789477C6d14eA6Bc718a'}"
 ```
