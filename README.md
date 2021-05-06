@@ -13,6 +13,7 @@ Clone ros package to your src folder in workspace:
 git clone https://github.com/LoSk-p/ocean_ros
 cd ..
 catkin_make
+source devel/setup.bash
 ```
 
 ## Set Ethereum network & node (Rinkeby & Infura)
