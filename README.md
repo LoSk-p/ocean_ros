@@ -46,7 +46,7 @@ Get Rinkeby OCEAN via this [fauset](https://faucet.rinkeby.oceanprotocol.com/).
 ## Run
 In the terminal with python virtual env run:
 ```bash
-roslaunch ocean_ros create_datatoken.launch
+roslaunch ocean_ros datatokens.launch
 ```
 
 ### Create datatoken
