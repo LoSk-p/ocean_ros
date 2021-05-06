@@ -5,6 +5,7 @@ from ocean_lib.ocean.ocean import Ocean
 from ocean_lib.web3_internal.wallet import Wallet
 from ocean_lib.data_provider.data_service_provider import DataServiceProvider
 from ocean_lib.common.agreements.service_factory import ServiceDescriptor
+from ocean_lib.common.agreements.service_types import ServiceTypes
 from ocean_lib.models.btoken import BToken
 from ocean_ros.msg import BuyingResponse
 from ocean_ros.msg import BuyDatatoken
@@ -27,20 +28,20 @@ def get_datatoken_callback(data):
     assert OCEAN_token.balanceOf(bob_wallet.address) > 0, "need Rinkeby OCEAN"
     data_token = bob_ocean.get_data_token(data.token_address)
     rospy.loginfo("Buying datatokens")
-    sleep(10)
+    time.sleep(10)
     bob_ocean.pool.buy_data_tokens(
         data.pool_address, 
         amount=1.0, # buy 1.0 datatoken
         max_OCEAN_amount=10.0, # pay up to 10.0 OCEAN
         from_wallet=bob_wallet
     )
-    rospe.loginfo(f"You have {data_token.token_balance(bob_wallet.address)} datatokens.")
+    rospy.loginfo(f"You have {data_token.token_balance(bob_wallet.address)} datatokens.")
     assert data_token.balanceOf(bob_wallet.address) >= 1.0, "You didn't get 1.0 datatoken"
     fee_receiver = None
     asset = bob_ocean.assets.resolve(data.did)
     service = asset.get_service(ServiceTypes.ASSET_ACCESS)
     quote = bob_ocean.assets.order(asset.did, bob_wallet.address, service_index=service.index)
-    sleep(10)
+    time.sleep(10)
     order_tx_id = bob_ocean.assets.pay_for_service(quote.amount, quote.data_token_address, asset.did, service.index, fee_receiver, bob_wallet)
     rospy.loginfo(f"order_tx_id = '{order_tx_id}'")
     if data.destination[-1] != '/':
