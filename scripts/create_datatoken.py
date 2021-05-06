@@ -6,8 +6,9 @@ from ocean_lib.web3_internal.wallet import Wallet
 from ocean_lib.data_provider.data_service_provider import DataServiceProvider
 from ocean_lib.common.agreements.service_factory import ServiceDescriptor
 from ocean_lib.models.btoken import BToken
-from ocean_ros.msg import Metadata
+from ocean_lib.common.agreements.service_types import ServiceTypes
 from ocean_ros.msg import TokenResponse
+from ocean_ros.msg import Metadata
 import time
 import os
 
@@ -20,7 +21,7 @@ config = Config(config_path)
 ocean = Ocean(config)
 
 def create_datatoken_callback(data):
-    rospy.loginfo(f'Got message')
+    rospy.loginfo(f'Got create datatoken request')
     wallet = Wallet(ocean.web3, private_key=data.private_key)
     data_token = ocean.create_data_token('DataToken1', 'DT1', wallet, blob=ocean.config.metadata_cache_uri)
     token_address = data_token.address

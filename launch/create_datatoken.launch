@@ -4,4 +4,8 @@
     <node pkg="ocean_ros" type="create_datatoken.py" name="datatoken_creator" respawn="true" output="screen">
         <param name="config" value="$(arg config)" />
     </node>
+
+    <node pkg="ocean_ros" type="buy_datatoken.py" name="datatoken_downloader" respawn="true" output="screen">
+        <param name="config" value="$(arg config)" />
+    </node>
 </launch>

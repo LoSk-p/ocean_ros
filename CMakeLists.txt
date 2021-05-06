@@ -52,6 +52,8 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    Metadata.msg
    TokenResponse.msg
+   BuyDatatoken.msg
+   BuyingResponse.msg
  )
 
 ## Generate services in the 'srv' folder
