@@ -78,9 +78,3 @@ def create_datatoken_callback(data):
 
 rospy.Subscriber('/create_datatoken', Metadata, create_datatoken_callback)
 rospy.spin()
-
-
-
-
-
-
