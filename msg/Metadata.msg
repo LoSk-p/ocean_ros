@@ -1,4 +1,4 @@
-string private_key
+string private_key_path
 string data_created
 string type
 string name

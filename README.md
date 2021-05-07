@@ -29,7 +29,10 @@ source devel/setup.bash
 
 1. Install Metamask to your browser and generate an Etherium account. Instructions are [here](https://docs.oceanprotocol.com/tutorials/metamask-setup/).
 2. Get Rinkeby ETH from a [fauset](https://faucet.rinkeby.io/).
-3. [Export the private key from Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key), you will need it for creating and buying datatokens.
+3. [Export the private key from Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key) and create a file with your private key:
+```bash
+echo <private_key> > private_ocean
+```
 
 ## Install Python libraries
 
@@ -50,10 +53,9 @@ roslaunch ocean_ros datatokens.launch
 ```
 
 ### Create datatoken
-Publish message to `/create_datatoken` topic with the private key from your metamask account. 
-Message example:
+Publish message to `/ocean/create_datatoken` topic with the path to a file with a private key from your metamask account. Message example:
 ```bash
-rostopic pub /create_datatoken ocean_ros/Metadata "private_key: ''                     
+rostopic pub /ocean/create_datatoken ocean_ros/Metadata "private_key_path: '/home/alena/private_ocean'                     
 data_created: '2019-12-28'
 type: 'dataset' 
 name: 'test_ros'
@@ -64,19 +66,19 @@ files_url: ['https://raw.githubusercontent.com/trentmc/branin/master/branin.arff
 tokens_nomber: 100.0
 ocean_amount: 10.0"
 ```
-You can see information about datatoken in `/token_response` topic:
+You can see information about datatoken in `/ocean/token_response` topic:
 
 ```bash
-rostopic echo /token_response
+rostopic echo /ocean/token_response
 ```
 ### Buy datatoken
-Publish message to `/get_datatoken` topic with the private key from your metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/token_response` topic).
+Publish message to `/ocean/get_datatoken` topic with the file with your private key from the metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/token_response` topic).
 Message example (don't forget to change `destination` in the message):
 ```bash
-rostopic pub /get_datatoken ocean_ros/BuyDatatoken "{private_key: '', destination: '/home/user/', token_address: '0x9fb21F68257F1d718d764B68b1430B6460796e42', did: 'did:op:9fb21F68257F1d718d764B68b1430B6460796e42', pool_address: '0xcF295B85ef5ADd0E513B789477C6d14eA6Bc718a'}"
+rostopic pub /ocean/get_datatoken ocean_ros/BuyDatatoken "{private_key_path: '/home/alena/private_ocean', destination: '/home/alena/', token_address: '0x9fb21F68257F1d718d764B68b1430B6460796e42', did: 'did:op:9fb21F68257F1d718d764B68b1430B6460796e42', pool_address: '0xcF295B85ef5ADd0E513B789477C6d14eA6Bc718a'}"
 ```
 
-Path to the downloaded file you can see in `/buying_response` topic:
+Path to the downloaded file you can see in `/ocean/buying_response` topic:
 ```bash
-rostopic echo /buying_response
+rostopic echo /ocean/buying_response
 ```

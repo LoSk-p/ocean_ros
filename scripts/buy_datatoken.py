@@ -14,15 +14,16 @@ import os
 
 rospy.init_node("datatoken_downloader", anonymous=False)
 config_path = rospy.get_param("~config")
-print(config_path)
 buy_response = rospy.Publisher("buying_response", BuyingResponse, queue_size=10)
 
 config = Config(config_path)
 bob_ocean = Ocean(config)
-
+rospy.loginfo(f'datatoken_downloader is ready')
 def get_datatoken_callback(data):
     rospy.loginfo("Got buy datatoken request")
-    bob_wallet = Wallet(bob_ocean.web3, private_key=data.private_key)
+    with open(data.private_key_path, 'r') as f:
+        private_key = f.read().rstrip()
+    bob_wallet = Wallet(bob_ocean.web3, private_key=private_key)
     assert bob_ocean.web3.eth.getBalance(bob_wallet.address) > 0, "need Rinkeby ETH"
     OCEAN_token = BToken(bob_ocean.OCEAN_address)
     assert OCEAN_token.balanceOf(bob_wallet.address) > 0, "need Rinkeby OCEAN"
@@ -60,5 +61,5 @@ def get_datatoken_callback(data):
 
 
 
-rospy.Subscriber('/get_datatoken', BuyDatatoken, get_datatoken_callback)
+rospy.Subscriber('/ocean/get_datatoken', BuyDatatoken, get_datatoken_callback)
 rospy.spin()

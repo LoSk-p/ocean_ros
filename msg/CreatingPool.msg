@@ -1,5 +1,5 @@
 string private_key_path
-string destination
 string token_address
 string did
-string pool_address
+float32 tokens_nomber
+float32 ocean_amount

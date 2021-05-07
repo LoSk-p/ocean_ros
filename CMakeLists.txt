@@ -54,6 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
    TokenResponse.msg
    BuyDatatoken.msg
    BuyingResponse.msg
+   CreatingPool.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -164,6 +165,7 @@ include_directories(
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
    scripts/create_datatoken.py
+   scripts/create_pool.py
    scripts/buy_datatoken.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
