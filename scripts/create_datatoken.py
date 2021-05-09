@@ -26,6 +26,7 @@ def create_datatoken_callback(data):
         private_key = f.read().rstrip()
     wallet = Wallet(ocean.web3, private_key=private_key)
     data_token = ocean.create_data_token('DataToken1', 'DT1', wallet, blob=ocean.config.metadata_cache_uri)
+    time.sleep(5)
     token_address = data_token.address
     rospy.loginfo(f'Created datatoken with address {token_address}')
     files = []
@@ -38,7 +39,7 @@ def create_datatoken_callback(data):
             "license": data.license, "dateCreated": data.data_created,
             "files": files}
         }
-    #print(metadata)
+    print(metadata)
     service_attributes = {
             "main": {
                 "name": "dataAssetAccessServiceAgreement",
@@ -48,8 +49,10 @@ def create_datatoken_callback(data):
                 "cost": 1.0, # <don't change, this is obsolete>
             }
         }
+    time.sleep(5)
     service_endpoint = DataServiceProvider.get_url(ocean.config)
     download_service = ServiceDescriptor.access_service_descriptor(service_attributes, service_endpoint)
+    time.sleep(5)
     asset = ocean.assets.create(
         metadata,
         wallet,
@@ -58,12 +61,14 @@ def create_datatoken_callback(data):
     did = asset.did
     rospy.loginfo(f'did: {did}')
     rospy.loginfo(f'Minting datatokens')
-    data_token.mint_tokens(wallet.address, data.tokens_nomber, wallet)
-
+    time.sleep(15)
+    #print(data.tokens_nomber)
+    data_token.mint_tokens(wallet.address, float(data.tokens_nomber), wallet)
+    rospy.loginfo(f"Minted {data.tokens_nomber} datatokens")
     # OCEAN_token = BToken(ocean.OCEAN_address)
     # assert OCEAN_token.balanceOf(wallet.address) > 0, "need OCEAN"
     # rospy.loginfo(f'Creating pool')
-    # time.sleep(15)
+    time.sleep(15)
     # pool = ocean.pool.create(
     #     token_address,
     #     data_token_amount=data.tokens_nomber,

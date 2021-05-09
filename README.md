@@ -56,7 +56,7 @@ roslaunch ocean_ros datatokens.launch
 Publish message to `/ocean/create_datatoken` topic with the path to a file with a private key from your metamask account. Message example:
 ```bash
 rostopic pub /ocean/create_datatoken ocean_ros/Metadata "private_key_path: '/home/alena/private_ocean'                     
-data_created: '2019-12-28'
+data_created: '2021-12-28T10:55:11Z'
 type: 'dataset' 
 name: 'test_ros'
 author: 'author'             
@@ -72,7 +72,7 @@ You can see information about datatoken in `/ocean/token_response` topic:
 rostopic echo /ocean/token_response
 ```
 ### Buy datatoken
-Publish message to `/ocean/get_datatoken` topic with the file with your private key from the metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/token_response` topic).
+Publish message to `/ocean/get_datatoken` topic with the file with your private key from the metamask account and information about datatoken (you can find it in [market](https://market.oceanprotocol.com/) or from the `/ocean/token_response` topic).
 Message example (don't forget to change `destination` in the message):
 ```bash
 rostopic pub /ocean/get_datatoken ocean_ros/BuyDatatoken "{private_key_path: '/home/alena/private_ocean', destination: '/home/alena/', token_address: '0x9fb21F68257F1d718d764B68b1430B6460796e42', did: 'did:op:9fb21F68257F1d718d764B68b1430B6460796e42', pool_address: '0xcF295B85ef5ADd0E513B789477C6d14eA6Bc718a'}"
