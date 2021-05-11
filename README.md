@@ -4,7 +4,7 @@ ROS package for working with OCEAN protocol
 ## Requirements 
 
 * Python 3.8.5 or later
-* ROS melodic
+* ROS melodic (installation instructions [here](http://wiki.ros.org/melodic/Installation/Ubuntu))
 
 ## Install ros package
 
@@ -17,7 +17,6 @@ source devel/setup.bash
 ```
 
 ## Set Ethereum network & node (Rinkeby & Infura)
-
 
 1. Infura runs hosted Ethereum nodes. Go to https://infura.io and sign up.
 2. At Infura site, create a new project.
@@ -36,9 +35,14 @@ echo <private_key> > private_ocean
 
 ## Install Python libraries
 
-Create Python virtual env and install libraries:
+Install python3.8 venv:
 ```bash
-python3 -m venv venv
+sudo apt-get install python3.8-venv
+```
+
+Create Python virtual environment and install libraries:
+```bash
+python3.8 -m venv venv
 source venv/bin/activate 
 pip install ocean-lib rospkg catkin_pkg
 ```
