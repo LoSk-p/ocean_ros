@@ -11,6 +11,7 @@ ROS package for working with OCEAN protocol
 Clone ros package to your src folder in workspace:
 ```bash
 mkdir -p ocean_ws/src
+cd ocean_ws/src
 git clone https://github.com/LoSk-p/ocean_ros
 cd ..
 catkin_make
