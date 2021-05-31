@@ -36,7 +36,7 @@ class DatatokenCreator():
             rospy.loginfo(f'Trying again')
             time.sleep(10)
             data_token = self.ocean.create_data_token('DataToken1', 'DT1', wallet, blob=self.ocean.config.metadata_cache_uri)
-        time.sleep(5)
+        time.sleep(2)
         token_address = data_token.address
         rospy.loginfo(f'Created datatoken with address {token_address}')
         files = []
@@ -49,7 +49,7 @@ class DatatokenCreator():
                 "license": data.license, "dateCreated": data.data_created,
                 "files": files}
             }
-        print(metadata)
+        #print(metadata)
         service_attributes = {
                 "main": {
                     "name": "dataAssetAccessServiceAgreement",
@@ -59,7 +59,7 @@ class DatatokenCreator():
                     "cost": 1.0, # <don't change, this is obsolete>
                 }
             }
-        time.sleep(5)
+        time.sleep(2)
         service_endpoint = DataServiceProvider.get_url(self.ocean.config)
         download_service = ServiceDescriptor.access_service_descriptor(service_attributes, service_endpoint)
         time.sleep(5)
@@ -81,10 +81,10 @@ class DatatokenCreator():
         did = asset.did
         rospy.loginfo(f'did: {did}')
         rospy.loginfo(f'Minting datatokens')
-        time.sleep(15)
+        time.sleep(5)
         data_token.mint_tokens(wallet.address, float(data.tokens_nomber), wallet)
         rospy.loginfo(f"Minted {data.tokens_nomber} datatokens")
-        time.sleep(15)
+        time.sleep(5)
 
         msg = CreatingPool()
         msg.private_key_path = data.private_key_path
