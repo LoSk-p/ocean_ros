@@ -10,10 +10,10 @@ ROS package for working with OCEAN protocol
 
 Clone ros package to your src folder in workspace:
 ```bash
+mkdir -p ocean_ws/src
 git clone https://github.com/LoSk-p/ocean_ros
 cd ..
 catkin_make
-source devel/setup.bash
 ```
 
 ## Set Ethereum network & node (Rinkeby & Infura)
@@ -45,6 +45,7 @@ Create Python virtual environment and install libraries:
 python3.8 -m venv venv
 source venv/bin/activate 
 pip install ocean-lib rospkg catkin_pkg
+source ~/ocean_ws/devel/setup.bash
 ```
 
 ## Get Rinkeby test OCEAN
